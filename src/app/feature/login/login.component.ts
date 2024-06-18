@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../shared/services/auth.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 import { Auth } from '../../shared/interfaces/auth.interface';
 
 @Component({
@@ -35,7 +35,8 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(
+      this.authService.login(this.loginForm.value)
+      .subscribe(
         response => {
           this.matSnackBar.open('Usuário Logado!', "Ok");
         },

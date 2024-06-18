@@ -1,0 +1,26 @@
+<div class="registro-container">
+  <mat-card>
+    <mat-card-title class="card-title">Registro</mat-card-title>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-container">
+      <div class="form-content-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="senha" type="password">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Login</mat-label>
+          <input matInput formControlName="login" type="text">
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit">Salvar</button>
+          <span class="spacer"></span>
+          <button mat-button (click)="onCancel()">Voltar</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
