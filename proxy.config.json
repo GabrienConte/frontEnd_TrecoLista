@@ -1,8 +1,8 @@
 {
-    "/api": {
-        "target" : "http://localhost:3000/",
+    "/backendApi": {
+        "target" : "https://localhost:7213",
         "pathRewrite": {
-            "^/api" : ""
+            "^/backendApi" : ""
         }
     }
 }

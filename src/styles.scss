@@ -17,3 +17,15 @@ body {
     max-width: 748px;
     width: 100%;
 }
+
+.form-container{
+    display: flex;
+    justify-content: center;
+}
+
+.form-content-container{
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+}
