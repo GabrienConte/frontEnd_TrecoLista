@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
+import { Auth } from '../../shared/interfaces/auth.interface';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,7 @@ import { RouterLink } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
+  matSnackBar = inject(MatSnackBar);
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
@@ -34,12 +37,10 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         response => {
-          console.log('Login successful', response);
-          // Redirecione para a página desejada após o login
+          this.matSnackBar.open('Usuário Logado!', "Ok");
         },
         error => {
-          console.error('Login failed', error);
-          this.errorMessage = 'Login failed. Please check your credentials.';
+          this.matSnackBar.open(error.error, "Ok");
         }
       );
     }
