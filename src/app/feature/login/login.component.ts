@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
-import { Auth } from '../../shared/interfaces/auth.interface';
+import { AuthData } from '../../shared/interfaces/auth.data.interface';
 
 @Component({
   selector: 'app-login',
@@ -23,14 +24,44 @@ import { Auth } from '../../shared/interfaces/auth.interface';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string = '';
+  erroLogin = false;
+
   matSnackBar = inject(MatSnackBar);
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = this.formBuilder.group({
+      emailOuLogin: ['', [Validators.required]],
+      senha: ['', [Validators.required]]
     });
+  }
+
+  login(): void {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const authData: AuthData = {
+      emailOuLogin: this.loginForm.value.emailOuLogin,
+      senha: this.loginForm.value.senha
+    };
+
+    this.authService.login(authData).subscribe(
+      response => {
+        this.matSnackBar.open('Usuário Logado!', "Ok");
+        this.router.navigate(['/']); // Navega para a rota principal após o login
+      },
+      error => {
+        this.matSnackBar.open("Error, usuário ou senha inválido", "Ok");
+      }
+    );
+  }
+
+  get form() {
+    return this.loginForm.controls;
   }
 
   onSubmit(): void {

@@ -2,21 +2,23 @@
     <mat-card>
       <mat-card-title class="card-title">Login</mat-card-title>
       <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-container">
           <div class="form-content-container">
             <mat-form-field appearance="fill">
               <mat-label>Email or usuário</mat-label>
-              <input matInput formControlName="username" type="text" />
+              <input matInput id="emailOuLogin" formControlName="emailOuLogin" type="text" />
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Senha</mat-label>
-              <input matInput formControlName="password" type="password" />
+              <input matInput id="senha" formControlName="senha" type="password" />
             </mat-form-field>
-
             <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Logar</button>
           </div>
         </form>
       </mat-card-content>
       <a mat-button routerLink="/register" class="link-registro">Não possui conta? Cadastra-se aqui!</a>
     </mat-card>
+    <div *ngIf="erroLogin" class="alert alert-danger mt-3">
+      Erro ao fazer login. Verifique suas credenciais.
+    </div>
 </div>  
