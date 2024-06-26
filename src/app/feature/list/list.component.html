@@ -1,9 +1,26 @@
+
 <div class="action-container">
+    <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Buscar</mat-label>
+        <input matInput (input)="searchProducts($event)" placeholder="Busque um produto">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
     <a mat-raised-button color="primary" [routerLink]="['/create-product']" >Criar Produto</a>
 </div>
 
-<div class="card-wrapper">
-    @for (product of products; track product.id) {
-        <app-card-product [product]="product"> </app-card-product>
-    }
+<h2>Produtos</h2>
+<hr>
+
+<div class="product-list-container">
+    <button mat-icon-button class="nav-button" aria-label="Previous" (click)="scrollLeft()">
+        <mat-icon>chevron_left</mat-icon>
+    </button>
+    <div class="product-list">
+        @for (product of products; track product.id) {
+            <app-card-product [product]="product"> </app-card-product>
+        }
+    </div>
+    <button mat-icon-button class="nav-button" aria-label="Next" (click)="scrollRight()">
+        <mat-icon>chevron_right</mat-icon>
+    </button>
 </div>
