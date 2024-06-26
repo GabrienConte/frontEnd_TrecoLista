@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -17,7 +18,8 @@ import { AuthData } from '../../shared/interfaces/auth.data.interface';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    RouterLink
+    RouterLink,
+    CommonModule 
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -56,6 +58,7 @@ export class LoginComponent {
       },
       error => {
         this.matSnackBar.open("Error, usuário ou senha inválido", "Ok");
+        this.erroLogin = true;
       }
     );
   }
