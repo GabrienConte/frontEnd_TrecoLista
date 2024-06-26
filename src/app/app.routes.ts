@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { ListComponent } from './feature/list/list.component';
 import { CreateProductComponent } from './feature/create-product/create-product.component';
-import { LoginComponent } from './feature/login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { CreateUsuarioComponent } from './feature/create-usuario/create-usuario.component';
 import { HomeComponent } from './pages/home/home.component';
 
