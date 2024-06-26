@@ -7,12 +7,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { CardProductComponent } from '../../shared/components/card-product/card-product.component';
 
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CardComponent, RouterLink, MatButtonModule, MatDividerModule, MatIconModule],
+  imports: [CardComponent, RouterLink, MatButtonModule, MatDividerModule, MatIconModule, CardProductComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })

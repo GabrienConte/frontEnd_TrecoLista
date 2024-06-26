@@ -1,9 +1,12 @@
-<mat-card>
+<mat-card class="card">
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-header>
-      <mat-card-title> {{productTitle()}}</mat-card-title>
+    <mat-card-title>R$ 30</mat-card-title>
+    <mat-card-subtitle>
+      {{productTitle()}}
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions>
-      <button mat-button>Editar</button>
-      <button mat-button>Deletar</button>
+      <button mat-flat-button color="primary">Favoritar</button>
   </mat-card-actions>
 </mat-card>

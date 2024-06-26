@@ -1,5 +1,13 @@
 .action-container {
     display: flex;
     justify-content: flex-end;
-    padding: 16px 0;
+    padding: 16px 16px;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 16px;
+    margin-bottom: 40px;
 }

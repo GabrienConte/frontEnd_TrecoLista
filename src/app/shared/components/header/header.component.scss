@@ -1,17 +1,26 @@
-.title {
-    text-align: center;
+.app-header 
+{
+    .app-name {
+        text-align: center;
+        font-family: "Oxygen Mono", monospace;
+        font-style: normal;
+        font-weight: lighter;
+        font-size: 32px;
+    }
+    
+    .mat-toolbar {
+        display: flex;
+        justify-content: space-between;
+        background-color: #93BADE;
+        color: black;
+        padding: 0 256px;
+    }
+      
+    .link-header {
+        color: black;
+    }
+      
+    .spacer {
+        flex: 1 1 auto;
+    }
 }
-
-.mat-toolbar {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .app-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .spacer {
-    flex: 1 1 auto;
-  }

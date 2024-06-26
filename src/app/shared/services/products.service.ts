@@ -10,10 +10,10 @@ export class ProductsService {
   httpClient = inject(HttpClient);
 
   getAll(){
-    return this.httpClient.get<Product[]>('/api/products');
+    return this.httpClient.get<Product[]>('http://localhost:3000/products');
   }
 
   post(payload: ProductPayload){
-    return this.httpClient.post('/api/products', payload);
+    return this.httpClient.post('http://localhost:3000/products', payload);
   }
 }
