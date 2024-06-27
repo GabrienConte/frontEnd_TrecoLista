@@ -5,8 +5,8 @@
         <mat-icon>chevron_left</mat-icon>
     </button>
     <div class="product-list">
-        @for (product of products; track product.id) {
-            <app-card-product [product]="product"> </app-card-product>
+        @for (produto of produtos; track produto.produtoId) {
+            <app-card-product [produto]="produto"> </app-card-product>
         }
     </div>
     <button mat-icon-button class="nav-button" aria-label="Next" (click)="scrollRight()">

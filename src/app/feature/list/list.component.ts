@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { Product } from '../../core/interfaces/product.interface';
 import {MatIconModule} from '@angular/material/icon';
@@ -9,6 +9,8 @@ import { RouterLink } from '@angular/router';
 import { CardProductComponent } from '../../shared/components/card-product/card-product.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ProdutoService } from '../../core/services/produto.service';
+import { ProdutoCard } from '../../core/interfaces/produto.interfaces';
 
 
 @Component({
@@ -26,12 +28,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   @Input() variantList: 'otherProdutos' | 'myProdutos' | 'allProdutos' = 'allProdutos'
   @Input() variantLabel: 'Outros Produtos' | 'Meus Produtos' | 'Todos os Produtos' = 'Todos os Produtos'
-  products: Product[] = [];
+  produtos: ProdutoCard[] = [];
 
-  productsService = inject(ProductsService);
+  constructor( private serviceProduto: ProdutoService){
+
+  }
 
   scrollLeft() {
     const container = document.querySelector('.product-list');
@@ -46,17 +50,19 @@ export class ListComponent {
   ngOnInit() {
     switch (this.variantList) {
       case 'allProdutos':
-        this.productsService.getAll().subscribe((products) => {
-          this.products = products
+        this.serviceProduto.getProdutosFavortitados().subscribe((produtos) => {
+          this.produtos = produtos
         });
       break;
       case 'myProdutos':
-        this.productsService.getAll().subscribe((products) => {
-          this.products = products
+        this.serviceProduto.getProdutosFavortitados().subscribe((produtos) => {
+          this.produtos = produtos
         });
       break;
       case 'otherProdutos':
-
+        this.serviceProduto.getProdutosNaoFavortitados().subscribe((produtos) => {
+          this.produtos = produtos
+        });
       break;
     }
   }
