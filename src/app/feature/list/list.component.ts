@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, inject } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { Product } from '../../core/interfaces/product.interface';
-import { CardComponent } from './components/card/card.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
@@ -16,7 +15,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-list',
   standalone: true,
   imports: [
-    CardComponent, 
     RouterLink, 
     MatButtonModule, 
     MatDividerModule,
