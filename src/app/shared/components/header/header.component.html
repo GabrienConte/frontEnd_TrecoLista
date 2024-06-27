@@ -2,32 +2,36 @@
     <mat-toolbar>
         <span class="app-name">Treco Lista</span>
         <span class="spacer"></span>
-        <a class="link-header" mat-button routerLink="/home">Inicio</a>
-        <a class="link-header" mat-button routerLink="/">Lista</a>
-        <a class="link-header" mat-button routerLink="/categoria">Categoria</a>
-        <span class="spacer"></span>
-        <button mat-icon-button aria-label="Notificações">
-          <mat-icon>notifications</mat-icon>
-        </button>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Sua Conta">
-          <mat-icon>account_circle</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <a mat-menu-item>
-            <mat-icon>manage_accounts</mat-icon>
-            <span>Meu Perfil</span>
-          </a>
-          <a>
-            <p></p>
-            <mat-divider></mat-divider>
-            <p></p>
-          </a>
-          <a mat-menu-item>
-            <mat-icon>logout</mat-icon>
-            <span>Sair</span>
-          </a>
-        </mat-menu>
-        
+        <ng-container *ngIf="authService.isAuthenticated(); else SemLogin">
+          <a class="link-header" mat-button routerLink="/home">Inicio</a>
+          <a class="link-header" mat-button routerLink="/">Lista</a>
+          <a class="link-header" mat-button routerLink="/categoria">Categoria</a>
+          <span class="spacer"></span>
+          <button mat-icon-button aria-label="Notificações">
+            <mat-icon>notifications</mat-icon>
+          </button>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Sua Conta">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <a mat-menu-item>
+              <mat-icon>manage_accounts</mat-icon>
+              <span>Meu Perfil</span>
+            </a>
+            <a>
+              <p></p>
+              <mat-divider></mat-divider>
+              <p></p>
+            </a>
+            <a mat-menu-item>
+              <mat-icon>logout</mat-icon>
+              <span>Sair</span>
+            </a>
+          </mat-menu>
+        </ng-container>
+        <ng-template #SemLogin>
+          
+        </ng-template>
     </mat-toolbar>
 </header>
   

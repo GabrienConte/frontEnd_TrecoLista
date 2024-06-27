@@ -6,6 +6,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -23,5 +24,5 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-
+  constructor(public authService: AuthService) {}
 }
