@@ -27,6 +27,8 @@ export class CreateUsuarioComponent implements OnInit{
   registroForm!: FormGroup;
   errorMessage: string = '';
 
+  matSnackBar = inject(MatSnackBar);
+
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class CreateUsuarioComponent implements OnInit{
       this.usuarioService.register(usuario)
       .subscribe({
         next: (response) => {
-          console.log('Registration successful', response);
+          this.matSnackBar.open('Usuário cadastrado com sucesso!', "Ok");
           this.router.navigate(['/login']);
         },
         error: (error) => {

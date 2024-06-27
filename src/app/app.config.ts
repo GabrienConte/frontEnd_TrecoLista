@@ -11,6 +11,7 @@ const SNACK_BAR_CONFIG: ValueProvider = {
     duration: 3000,
     horizontalPosition: 'right',
     verticalPosition: 'top',
+    panelClass: 'snackBarPosition'
   } as MatSnackBarConfig
 };
 
