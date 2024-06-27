@@ -9,9 +9,25 @@
         <button mat-icon-button aria-label="Notificações">
           <mat-icon>notifications</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Sua Conta">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Sua Conta">
           <mat-icon>account_circle</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item>
+            <mat-icon>manage_accounts</mat-icon>
+            <span>Meu Perfil</span>
+          </a>
+          <a>
+            <p></p>
+            <mat-divider></mat-divider>
+            <p></p>
+          </a>
+          <a mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+          </a>
+        </mat-menu>
+        
     </mat-toolbar>
 </header>
   
