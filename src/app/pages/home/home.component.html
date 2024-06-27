@@ -1,4 +1,14 @@
 <app-container>
-  <app-list [variant]="'allProdutos'">
+  <div class="action-container">
+    <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Buscar</mat-label>
+        <input matInput (input)="searchProducts($event)" placeholder="Busque um produto">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <a mat-raised-button color="accent" [routerLink]="['/create-product']" >Criar Produto</a>
+  </div>
+  <app-list [variantList]="'allProdutos'" [variantLabel]="'Todos os Produtos'">
+  </app-list>
+  <app-list [variantList]="'myProdutos'" [variantLabel]="'Meus Produtos'">
   </app-list>
 </app-container>
