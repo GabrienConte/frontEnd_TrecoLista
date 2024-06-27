@@ -53,6 +53,7 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/assets/custom-them.scss",
               "src/styles.scss"
             ],
             "scripts": []
