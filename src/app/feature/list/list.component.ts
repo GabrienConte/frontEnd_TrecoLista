@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, inject } from '@angular/core';
-import { ProductsService } from '../../shared/services/products.service';
-import { Product } from '../../shared/interfaces/product.interface';
+import { ProductsService } from '../../core/services/products.service';
+import { Product } from '../../core/interfaces/product.interface';
 import { CardComponent } from './components/card/card.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
