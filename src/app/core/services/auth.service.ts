@@ -3,17 +3,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthData } from '../interfaces/auth.data.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7213/api/v1/auth';
+  private apiUrl =environment.apiUrl;
   
   constructor(private http: HttpClient) { }
 
   login(authData: AuthData): Observable<any> {
-    return this.http.post<any>(this.apiUrl, authData)
+    return this.http.post<any>(`${this.apiUrl}/auth`, authData)
       .pipe(
         tap(response => {
           localStorage.setItem('token', response.token);
