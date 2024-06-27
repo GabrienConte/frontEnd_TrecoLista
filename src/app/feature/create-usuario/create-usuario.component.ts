@@ -45,7 +45,7 @@ export class CreateUsuarioComponent implements OnInit{
       const usuario: Usuario = this.registroForm.value;
       this.usuarioService.register(usuario)
       .subscribe({
-        next: (response) => {
+        next: () => {
           this.matSnackBar.open('Usuário cadastrado com sucesso!', "Ok");
           this.router.navigate(['/login']);
         },
