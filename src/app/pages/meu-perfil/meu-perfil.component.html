@@ -1,0 +1,31 @@
+<section class="perfil-component">
+    <mat-card class="perfil">
+      <div class="form-container">
+        <mat-card-header>
+          <mat-card-title class="card-title">Meu Perfil</mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+          <mat-card-content>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="Digite seu e-mail">
+              <mat-error *ngIf="perfilForm.get('email')?.errors?.['required']">E-mail é obrigatório</mat-error>
+              <mat-error *ngIf="perfilForm.get('email')?.errors?.['email']">E-mail inválido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Usuário</mat-label>
+              <input matInput formControlName="login" type="text" placeholder="Digite seu usuário de login">
+              <mat-error>Usuário é obrigatório</mat-error>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit" [disabled]="perfilForm.invalid">Salvar</button>
+              <span class="spacer"></span>
+              <button mat-button (click)="onCancel()">Voltar</button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </mat-card>
+</section>

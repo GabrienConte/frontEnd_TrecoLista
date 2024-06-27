@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Usuario } from '../../core/interfaces/usuario.interface';
+import { Usuario } from '../../core/interfaces/usuario.interfaces';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { CommonModule } from '@angular/common';
 
@@ -43,7 +43,7 @@ export class CreateUsuarioComponent implements OnInit{
   onSubmit(): void {
     if (this.registroForm.valid) {
       const usuario: Usuario = this.registroForm.value;
-      this.usuarioService.register(usuario)
+      this.usuarioService.cadastrar(usuario)
       .subscribe({
         next: () => {
           this.matSnackBar.open('Usuário cadastrado com sucesso!', "Ok");

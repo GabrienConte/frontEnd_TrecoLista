@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Usuario } from '../interfaces/usuario.interface';
+import { Usuario, UsuarioUpdate } from '../interfaces/usuario.interfaces';
 import { environment } from '../../../environments/environment';
 import { TokenService } from './token.service';
 import { jwtDecode } from 'jwt-decode';
@@ -45,12 +45,28 @@ export class UsuarioService {
     return this.tokenService.possuiToken();
   }
 
-  register(usuario: Usuario): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/usuario`, usuario, {
+  cadastrar(usuario: Usuario): Observable<Usuario> {
+    return this.httpClient.post<Usuario>(`${this.apiUrl}/usuario`, usuario, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     });
+  }
+
+  buscarUsuario(token: string): Observable<Usuario> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    })
+
+    return this.httpClient.get<Usuario>(`${this.apiUrl}/usuario`, {headers});
+  }
+
+  editarUsuario(usuario: UsuarioUpdate,token: string): Observable<UsuarioUpdate> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    })
+
+    return this.httpClient.put<UsuarioUpdate>(`${this.apiUrl}/usuario`, usuario ,{headers});
   }
 
 }

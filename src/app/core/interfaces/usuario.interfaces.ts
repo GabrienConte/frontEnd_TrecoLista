@@ -4,3 +4,8 @@ export interface Usuario {
   login: string;
   tipoUsuario: string;
 }
+
+export interface UsuarioUpdate {
+  email: string;
+  login: string;
+}

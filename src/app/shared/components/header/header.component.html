@@ -14,7 +14,7 @@
             <mat-icon>account_circle</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <a mat-menu-item>
+            <a mat-menu-item routerLink="/meuPerfil">
               <mat-icon>manage_accounts</mat-icon>
               <span>Meu Perfil</span>
             </a>
@@ -23,10 +23,10 @@
               <mat-divider></mat-divider>
               <p></p>
             </a>
-            <a mat-menu-item>
+            <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon>
               <span>Sair</span>
-            </a>
+            </button>
           </mat-menu>
         </ng-container>
         <ng-template #SemLogin>
