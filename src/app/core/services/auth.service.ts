@@ -1,9 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthData } from '../interfaces/auth.data.interface';
 import { environment } from '../../../environments/environment';
+import { UsuarioService } from './usuario.service';
+
+interface AuthResponse {
+  access_token: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +16,20 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
   private apiUrl =environment.apiUrl;
   
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private usuarioService: UsuarioService  
+  ) { }
 
-  login(authData: AuthData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth`, authData)
-      .pipe(
-        tap(response => {
-          localStorage.setItem('token', response.token);
-        })
-      );
-  }
-
-  logout(): void {
-    localStorage.removeItem('token');
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  isAuthenticated(): boolean {
-    const token = this.getToken();
-    return !!token; // Verifica se existe um token
+  login(authData: AuthData): 
+  Observable<HttpResponse<AuthResponse>> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth`,
+      authData,
+    {observe: 'response'}).pipe(
+      tap((response) => {
+        const authtoken = response.body?.access_token || '';
+        this.usuarioService.salvarToken(authtoken);
+      })
+    );
   }
 }

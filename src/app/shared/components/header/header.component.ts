@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { AuthService } from '../../../core/services/auth.service';
+import { TokenService } from '../../../core/services/token.service';
+import { UsuarioService } from '../../../core/services/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -24,5 +26,5 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(public authService: AuthService) {}
+  constructor(public usuarioService: UsuarioService) {}
 }
