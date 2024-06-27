@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
-import { AuthData } from '../../shared/interfaces/auth.data.interface';
+import { AuthData } from '../../core/interfaces/auth.data.interface';
 
 @Component({
   selector: 'app-login',

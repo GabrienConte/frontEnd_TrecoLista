@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Usuario } from '../../shared/interfaces/usuario.interface';
+import { Usuario } from '../../core/interfaces/usuario.interface';
 import { UsuarioService } from '../../core/services/usuario.service';
 
 @Component({
