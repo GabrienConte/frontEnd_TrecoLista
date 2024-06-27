@@ -18,13 +18,13 @@
         <mat-card-actions>
           <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">Logar</button>
           <p>Ainda não possui conta?
-            <a routerLink="/register" class="link-registro"><strong><u>Clique aqui para se cadastrar!</u></strong></a>
+            <a routerLink="/registro" class="link-registro"><strong><u>Clique aqui para se cadastrar!</u></strong></a>
           </p>  
         </mat-card-actions>
       </form>
     </div>
   </mat-card>
-  <div *ngIf="erroLogin" class="alert alert-danger mt-3">
+  <mat-error *ngIf="erroLogin">
     Erro ao fazer login. Verifique suas credenciais.
-  </div>
+  </mat-error>
 </section>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -24,8 +24,8 @@ import { AuthData } from '../../core/interfaces/auth.data.interface';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
   erroLogin = false;
 
   matSnackBar = inject(MatSnackBar);
@@ -35,10 +35,13 @@ export class LoginComponent {
     private router: Router,
     private formBuilder: FormBuilder
   ) {
+    
+  }
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       emailOuLogin: ['', [Validators.required]],
       senha: ['', [Validators.required]]
-    });
+    });;
   }
 
   login(): void {
@@ -51,16 +54,15 @@ export class LoginComponent {
       senha: this.loginForm.value.senha
     };
 
-    this.authService.login(authData).subscribe(
-      response => {
+    this.authService.login(authData).subscribe({
+      next: () => {
         this.matSnackBar.open('Usuário Logado!', "Ok");
-        this.router.navigate(['/']); // Navega para a rota principal após o login
+        this.router.navigate(['/home']); // Navega para a rota principal após o login
       },
-      error => {
-        this.matSnackBar.open("Error, usuário ou senha inválido", "Ok");
+      error: () => {
         this.erroLogin = true;
       }
-    );
+    });
   }
 
   get form() {

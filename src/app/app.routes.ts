@@ -10,7 +10,7 @@ import { CategoriasComponent } from './pages/categorias/categorias.component';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: 'register', component: CreateUsuarioComponent },
+    { path: 'registro', component: CreateUsuarioComponent },
     { path: 'home', component: HomeComponent },
     { path: 'categoria', component: CategoriasComponent},
     {
