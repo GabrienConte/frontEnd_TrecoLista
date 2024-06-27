@@ -1,28 +1,8 @@
-.action-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-}
-
-.search-input {
-    width: 260px;
-}
-  
-h2 {
-    margin-top: 0;
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background: #ccc;
-    margin-bottom: 16px;
-}
-
 .product-list-container {
     display: flex;
     align-items: center;
     overflow: hidden;
+    margin-bottom: 32px;
 }
 
 .product-list {
@@ -33,4 +13,15 @@ hr {
 
 .nav-button {
     background: rgba(252, 252, 252, 0.258);
+}
+
+h2 {
+    margin-top: 32px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin-bottom: 16px;
 }

@@ -29,15 +29,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  @Input() variant: 'otherProdutos' | 'myProdutos' | 'allProdutos' = 'allProdutos'
+  @Input() variantList: 'otherProdutos' | 'myProdutos' | 'allProdutos' = 'allProdutos'
+  @Input() variantLabel: 'Outros Produtos' | 'Meus Produtos' | 'Todos os Produtos' = 'Todos os Produtos'
   products: Product[] = [];
 
   productsService = inject(ProductsService);
-
-  searchProducts(event: Event) {
-    const input = event.target as HTMLInputElement;
-    // Lógica para buscar produtos
-  }
 
   scrollLeft() {
     const container = document.querySelector('.product-list');
@@ -50,14 +46,16 @@ export class ListComponent {
   }
 
   ngOnInit() {
-    switch (this.variant) {
+    switch (this.variantList) {
       case 'allProdutos':
         this.productsService.getAll().subscribe((products) => {
           this.products = products
         });
       break;
       case 'myProdutos':
-
+        this.productsService.getAll().subscribe((products) => {
+          this.products = products
+        });
       break;
       case 'otherProdutos':
 
