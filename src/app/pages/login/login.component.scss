@@ -11,7 +11,7 @@
       flex-direction: row;
       justify-content: center;
       margin-top: 68px;
-      background-color: aliceblue;
+      background-color: hsla(208, 100%, 97%, 0.250);
       border-radius: 12px;
     }
   
@@ -57,9 +57,10 @@
   
       a {
         cursor: pointer;
+        color: #26a6e1;
   
         &:active {
-          color: #26a6e1;
+          color: #2600ff;
         }
       }
     }

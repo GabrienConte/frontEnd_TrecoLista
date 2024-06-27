@@ -4,15 +4,17 @@
       <mat-card-header>
         <mat-card-title>Login - Treco Lista</mat-card-title>
       </mat-card-header>
-      <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-container">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
         <mat-card-content>
           <mat-form-field appearance="outline">
             <mat-label>Email or usuário</mat-label>
             <input matInput id="emailOuLogin" formControlName="emailOuLogin" type="text" placeholder="Digite seu e-mail ou usuário"/>
+            <mat-error>E-mail ou usuário é obrigatório</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Senha</mat-label>
             <input matInput id="senha" formControlName="senha" type="password" placeholder="Digite sua senha"/>
+            <mat-error>Senha é obrigatória</mat-error>
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
