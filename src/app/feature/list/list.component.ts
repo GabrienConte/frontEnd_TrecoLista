@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { ProductsService } from '../../core/services/products.service';
-import { Product } from '../../core/interfaces/product.interface';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';

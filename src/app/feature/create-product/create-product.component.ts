@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { ProductsService } from '../../core/services/products.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +19,7 @@ import { Router } from '@angular/router';
   styleUrl: './create-product.component.scss'
 })
 export class CreateProductComponent {
-  productsService = inject(ProductsService);
+  //productsService = inject();
 
   matSnackBar = inject(MatSnackBar);
 
@@ -34,12 +33,12 @@ export class CreateProductComponent {
   });
 
   onSubmit() {
-    this.productsService.post({
-      title: this.form.controls.title.value
-    })
-    .subscribe(() => {
-      this.matSnackBar.open('Produto criado com sucesso!', "Ok");
-      this.router.navigateByUrl('/');
-    });
+    // this.productsService.post({
+    //   title: this.form.controls.title.value
+    // })
+    // .subscribe(() => {
+    //   this.matSnackBar.open('Produto criado com sucesso!', "Ok");
+    //   this.router.navigateByUrl('/');
+    // });
   }
 }

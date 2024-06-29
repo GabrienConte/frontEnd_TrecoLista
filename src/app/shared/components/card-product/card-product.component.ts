@@ -2,7 +2,6 @@ import { Component, computed, input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card"
 import { MatButtonModule } from "@angular/material/button"
 import { MatIconModule } from '@angular/material/icon';
-import { Product } from '../../../core/interfaces/product.interface';
 import { ProdutoCard } from '../../../core/interfaces/produto.interfaces';
 
 @Component({
