@@ -2,7 +2,7 @@
     <mat-card class="perfil">
       <div class="form-container">
         <mat-card-header>
-          <mat-card-title class="card-title">Meu Perfil</mat-card-title>
+          <mat-card-title class="card-title">Seu perfil, {{nomeUsuario}}</mat-card-title>
         </mat-card-header>
         <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
           <mat-card-content>
@@ -28,4 +28,7 @@
         </form>
       </div>
     </mat-card>
+    <mat-error *ngIf="errorMessage">
+      Erro ao fazer login. Verifique suas credenciais.
+    </mat-error>
 </section>

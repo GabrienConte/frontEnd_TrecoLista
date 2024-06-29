@@ -33,4 +33,7 @@
       </form>
     </div>
   </mat-card>
+  <mat-error *ngIf="errorMessage">
+    Erro ao fazer login. Verifique suas credenciais.
+  </mat-error>
 </section>

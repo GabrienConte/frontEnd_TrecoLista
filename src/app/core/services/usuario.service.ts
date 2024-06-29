@@ -46,27 +46,19 @@ export class UsuarioService {
   }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.httpClient.post<Usuario>(`${this.apiUrl}/usuario`, usuario, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+    return this.httpClient.post<Usuario>(`${this.apiUrl}/usuario`, usuario);
   }
 
-  buscarUsuario(token: string): Observable<Usuario> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    })
-
-    return this.httpClient.get<Usuario>(`${this.apiUrl}/usuario`, {headers});
+  buscarUsuario(): Observable<Usuario> {
+    return this.httpClient.get<Usuario>(`${this.apiUrl}/usuario`);
   }
 
-  editarUsuario(usuario: UsuarioUpdate,token: string): Observable<UsuarioUpdate> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    })
+  buscarUsuarioUpdate(): Observable<UsuarioUpdate> {
+    return this.httpClient.get<UsuarioUpdate>(`${this.apiUrl}/usuario/update`);
+  }
 
-    return this.httpClient.put<UsuarioUpdate>(`${this.apiUrl}/usuario`, usuario ,{headers});
+  editarUsuario(usuario: UsuarioUpdate): Observable<UsuarioUpdate> {
+    return this.httpClient.put<UsuarioUpdate>(`${this.apiUrl}/usuario`, usuario);
   }
 
 }
