@@ -21,6 +21,6 @@ export class CardProductComponent {
   produtoIsFavoritado = computed(() => this.produto().isFavoritado)
 
   toggleFavorite() {
-    this.produtoIsFavoritado = computed(() => !this.produtoIsFavoritado);
+    this.produtoIsFavoritado = computed(() => !!this.produtoIsFavoritado);
   }
 }

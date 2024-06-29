@@ -14,10 +14,10 @@ export class ProdutoService {
   constructor(private httpClient: HttpClient ) { }
 
   getProdutosFavortitados () : Observable<ProdutoCard[]> {
-    return this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produtosFavoritados`);
+    return this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produto/Favoritados`);
   }
 
   getProdutosNaoFavortitados () : Observable<ProdutoCard[]> {
-    return this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produtosNaoFavoritados`);
+    return this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produto/NaoFavoritados`);
   }
 }

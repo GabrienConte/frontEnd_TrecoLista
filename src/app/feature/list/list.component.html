@@ -1,15 +1,20 @@
 <h2>{{variantLabel}}</h2>
 <hr>
 <div class="product-list-container">
-    <button mat-icon-button class="nav-button" aria-label="Previous" (click)="scrollLeft()">
-        <mat-icon>chevron_left</mat-icon>
-    </button>
-    <div class="product-list">
-        @for (produto of produtos; track produto.produtoId) {
-            <app-card-product [produto]="produto"> </app-card-product>
-        }
-    </div>
-    <button mat-icon-button class="nav-button" aria-label="Next" (click)="scrollRight()">
-        <mat-icon>chevron_right</mat-icon>
-    </button>
+    <ng-container *ngIf="produtos?.length; else noProducts">
+        <button mat-icon-button class="nav-button" aria-label="Previous" (click)="scrollLeft()">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <div class="product-list">
+            @for (produto of produtos; track produto.produtoId) {
+                <app-card-product [produto]="produto"> </app-card-product>
+            }
+        </div>
+        <button mat-icon-button class="nav-button" aria-label="Next" (click)="scrollRight()">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </ng-container>
+    <ng-template #noProducts>
+        <p>Não há produtos disponíveis nesta lista.</p>
+    </ng-template>
 </div>

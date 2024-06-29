@@ -9,12 +9,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProdutoService } from '../../core/services/produto.service';
 import { ProdutoCard } from '../../core/interfaces/produto.interfaces';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-list',
   standalone: true,
   imports: [
+    CommonModule,
     RouterLink, 
     MatButtonModule, 
     MatDividerModule,
@@ -48,7 +50,7 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     switch (this.variantList) {
       case 'allProdutos':
-        this.serviceProduto.getProdutosFavortitados().subscribe((produtos) => {
+        this.serviceProduto.getProdutosNaoFavortitados().subscribe((produtos) => {
           this.produtos = produtos
         });
       break;
