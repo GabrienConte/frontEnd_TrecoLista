@@ -50,19 +50,13 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     switch (this.variantList) {
       case 'allProdutos':
-        this.serviceProduto.getProdutosNaoFavortitados().subscribe((produtos) => {
-          this.produtos = produtos
-        });
+        this.serviceProduto.produtosNaoFavoritados$.subscribe(produtos => this.produtos = produtos);
       break;
       case 'myProdutos':
-        this.serviceProduto.getProdutosFavortitados().subscribe((produtos) => {
-          this.produtos = produtos
-        });
+        this.serviceProduto.produtosFavoritados$.subscribe(produtos => this.produtos = produtos);
       break;
       case 'otherProdutos':
-        this.serviceProduto.getProdutosNaoFavortitados().subscribe((produtos) => {
-          this.produtos = produtos
-        });
+        this.serviceProduto.produtosNaoFavoritados$.subscribe(produtos => this.produtos = produtos);
       break;
     }
   }

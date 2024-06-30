@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ProdutoCard } from '../interfaces/produto.interfaces';
 import { environment } from '../../../environments/environment';
 
@@ -9,15 +9,32 @@ import { environment } from '../../../environments/environment';
 })
 export class ProdutoService {
 
+  private produtosNaoFavoritadosSubject: BehaviorSubject<ProdutoCard[]> = new BehaviorSubject<ProdutoCard[]>([]);
+  private produtosFavoritadosSubject: BehaviorSubject<ProdutoCard[]> = new BehaviorSubject<ProdutoCard[]>([]);
+
   private apiUrl: string = environment.apiUrl
 
-  constructor(private httpClient: HttpClient ) { }
-
-  getProdutosFavortitados () : Observable<ProdutoCard[]> {
-    return this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produto/Favoritados`);
+  constructor(private httpClient: HttpClient ) { 
+    this.carregarProdutosNaoFavoritados();
+    this.carregarProdutosFavoritados();
   }
 
-  getProdutosNaoFavortitados () : Observable<ProdutoCard[]> {
-    return this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produto/NaoFavoritados`);
+  get produtosNaoFavoritados$(): Observable<ProdutoCard[]> {
+    return this.produtosNaoFavoritadosSubject.asObservable()
+    
+  }
+
+  get produtosFavoritados$(): Observable<ProdutoCard[]> {
+    return this.produtosFavoritadosSubject.asObservable();
+  }
+
+  carregarProdutosFavoritados () {
+    this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produto/Favoritados`)
+      .subscribe(produtos => this.produtosFavoritadosSubject.next(produtos));
+  }
+
+  carregarProdutosNaoFavoritados () {
+    return this.httpClient.get<ProdutoCard[]>(`${this.apiUrl}/produto/NaoFavoritados`)
+      .subscribe(produtos => this.produtosNaoFavoritadosSubject.next(produtos));;
   }
 }

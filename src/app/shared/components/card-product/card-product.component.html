@@ -1,15 +1,23 @@
 <mat-card class="card">
   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-header>
-    <mat-card-title>R$ {{produtoValor()}}</mat-card-title>
+    <mat-card-title>
+      R$ {{produto.valor}}
+    </mat-card-title>
     <mat-card-subtitle>
-      {{produtoDescricao()}}
+      {{produto.descricao}}
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions>
-    <button mat-flat-button color="accent">Ir para o site</button>
-    <button mat-icon-button (click)="toggleFavorite()">
-      <mat-icon>{{ produtoIsFavoritado() ? 'favorite' : 'favorite_border' }}</mat-icon>
+    <button mat-fab extended color="accent" class="detalhe-botao">
+      Detalhes
+      <mat-icon>info</mat-icon>
     </button>
+    <button mat-icon-button (click)="toggleFavorite()">
+      <mat-icon>{{ produto.isFavoritado ? 'favorite' : 'favorite_border' }}</mat-icon>
+    </button>
+    <a mat-icon-button href="{{ produto.link }}" target="_blank" aria-label="Visitar site">
+      <mat-icon>launch</mat-icon>
+    </a>
   </mat-card-actions>
 </mat-card>
