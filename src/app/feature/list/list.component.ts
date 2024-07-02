@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
@@ -26,11 +25,12 @@ import { CommonModule } from '@angular/common';
     MatInputModule
     ],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.scss'
+  styleUrl: './list.component.scss',
 })
 export class ListComponent implements OnInit {
-  @Input() variantList: 'otherProdutos' | 'myProdutos' | 'allProdutos' = 'allProdutos'
-  @Input() variantLabel: 'Outros Produtos' | 'Meus Produtos' | 'Todos os Produtos' = 'Todos os Produtos'
+  @Input() variantList: 'otherProdutos' | 'myProdutos' | 'allProdutos' = 'allProdutos';
+  @Input() variantLabel: 'Outros Produtos' | 'Meus Produtos' | 'Todos os Produtos' = 'Todos os Produtos';
+  @Input() variantType: 'emLinha' | 'emGrade' = 'emLinha';
   produtos: ProdutoCard[] = [];
 
   constructor( private serviceProduto: ProdutoService){

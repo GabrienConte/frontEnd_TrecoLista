@@ -1,16 +1,37 @@
-.product-list-container {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    margin-bottom: 32px;
-}
-
-.product-list {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-}
-
-.nav-button {
-    background: rgba(252, 252, 252, 0.258);
-}
+.emLinha {
+    .product-list-container {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+  
+    .product-list {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+  
+    .nav-button {
+      background: rgba(252, 252, 252, 0.258);
+    }
+  }
+  
+  .emGrade {
+    .product-list-container {
+        display: flex;
+    }
+  
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        row-gap: 16px;
+        margin-bottom: 40px;
+    }
+  
+    .nav-button {
+      display: none; // Ocultar os botões de navegação
+    }
+  }
+  
