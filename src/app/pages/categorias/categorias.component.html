@@ -1,1 +1,20 @@
-<p>categorias works!</p>
+<app-container>
+  <h2>Lista de Categorias</h2>
+  <hr>
+  
+  <table mat-table [dataSource]="categorias" class="mat-elevation-z8">
+    <ng-container matColumnDef="descricao">
+      <th mat-header-cell *matHeaderCellDef> Descrição </th>
+      <td mat-cell *matCellDef="let categoria"> {{categoria.descricao}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="ativo">
+      <th mat-header-cell *matHeaderCellDef> ativo </th>
+      <td mat-cell *matCellDef="let categoria"> {{categoria.ativo}} </td>
+    </ng-container>
+
+    <tr mat-header-row class="header" *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</app-container>

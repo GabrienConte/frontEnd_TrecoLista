@@ -13,31 +13,13 @@ body {
     padding-top: 18%;
 }
 
-.container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+h2 {
+    margin-top: 32px;
 }
 
-.content-container {
-    max-width: 748px;
-    width: 100%;
-}
-
-.form-container{
-    display: flex;
-    justify-content: center;
-}
-
-.form-content-container{
-    width: 100%;
-    max-width: 450px;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-title{
-    padding: 8px;
-    margin: 8px;
-    text-align: center;
+hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin-bottom: 16px;
 }
