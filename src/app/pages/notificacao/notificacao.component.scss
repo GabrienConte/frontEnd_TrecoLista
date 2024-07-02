@@ -1,0 +1,33 @@
+.notificacao{
+    mat-list {
+        padding: 0;
+        width: 450px;
+      }
+      
+      mat-list-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
+      
+        h3 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      
+        p {
+          margin: 5px 0 0 0;
+          font-size: 14px;
+          color: #757575;
+        }
+      }
+      
+      mat-list + p {
+        padding: 20px;
+        text-align: center;
+        color: #757575;
+        font-size: 14px;
+      }
+}

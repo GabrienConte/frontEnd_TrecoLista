@@ -4,6 +4,7 @@ import { CategoriaService } from '../../core/services/categoria.service';
 import {MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { ContainerComponent } from '../../shared/components/container/container.component';
+import { ActionContainerComponent } from '../../shared/components/action-container/action-container.component';
 
 @Component({
   selector: 'app-categorias',
@@ -11,7 +12,8 @@ import { ContainerComponent } from '../../shared/components/container/container.
   imports: [
     ContainerComponent,
     CommonModule,
-    MatTableModule
+    MatTableModule,
+    ActionContainerComponent
   ],
   templateUrl: './categorias.component.html',
   styleUrl: './categorias.component.scss'

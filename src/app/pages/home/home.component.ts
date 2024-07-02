@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { ActionContainerComponent } from '../../shared/components/action-container/action-container.component';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     ContainerComponent, 
     ListComponent,
+    ActionContainerComponent,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule, 
@@ -26,8 +28,5 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class HomeComponent {
 
-  searchProducts(event: Event) {
-    const input = event.target as HTMLInputElement;
-    // Lógica para buscar produtos
-  }
+  
 }

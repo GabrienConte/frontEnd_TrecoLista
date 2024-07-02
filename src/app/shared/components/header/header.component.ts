@@ -9,21 +9,25 @@ import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { Router } from '@angular/router';
+import { NotificacaoService } from '../../../core/services/notificacao.service';
+import { Notificacao } from '../../../core/interfaces/notificacao.interface';
+import { NotificacaoComponent } from "../../../pages/notificacao/notificacao.component";
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [
-    CommonModule, 
-    MatToolbarModule, 
-    MatIconModule, 
-    MatButtonModule,
-    MatMenuModule, 
-    MatDividerModule,
-    RouterModule
-  ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'app-header',
+    standalone: true,
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss',
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatDividerModule,
+        RouterModule,
+        NotificacaoComponent
+    ]
 })
 export class HeaderComponent {
   router = inject(Router);
