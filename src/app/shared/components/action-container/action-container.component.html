@@ -5,6 +5,6 @@
             <input matInput (input)="searchProducts($event)" placeholder="Procurar {{variantLabels}}">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <a mat-raised-button color="accent" [routerLink]="['/create-product']" >Criar {{variantLabels}}</a>
+        <a mat-raised-button color="accent" [routerLink]="['/' + variantLabels.toLocaleLowerCase() + '-form']" >Criar {{variantLabels}}</a>
     </div>
 </section>

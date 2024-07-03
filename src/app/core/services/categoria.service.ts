@@ -14,6 +14,6 @@ export class CategoriaService {
   constructor(private httpClient: HttpClient) { }
 
   carregarCategorias(): Observable<Categoria[]> {
-    return this.httpClient.get<Categoria[]>(`${this.apiUrl}/categoria`);
+    return this.httpClient.get<Categoria[]>(`${this.apiUrl}/categoria/ativas`);
   }
 }

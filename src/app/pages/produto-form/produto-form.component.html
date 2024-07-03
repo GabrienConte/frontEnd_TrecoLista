@@ -1,0 +1,71 @@
+<app-container>
+    <section class="form-produto-component">
+      <mat-card class="form-produto">
+        <div class="form-container">
+          <mat-card-header>
+            <mat-card-title class="card-title">{{acaoForm}} Produto</mat-card-title>
+          </mat-card-header>
+          <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+              <mat-form-field appearance="outline">
+                <mat-label>Link</mat-label>
+                <input matInput formControlName="link" placeholder="Digite o link do produto">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Plataforma</mat-label>
+                <mat-select>
+                  @for (food of foods; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Categoria</mat-label>
+                <mat-select>
+                  @for (food of foods; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Valor</mat-label>
+                <input matInput formControlName="valor" type="number" placeholder="Digite o valor do produto">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Prioriade</mat-label>
+                <mat-select>
+                    <mat-option [value]="1">Baixa</mat-option>
+                    <mat-option [value]="5">Média</mat-option>
+                    <mat-option [value]="10">Alta</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="button-row">
+                <button mat-raised-button color="primary" type="submit" [disabled]="produtoForm.invalid">Salvar</button>
+                <span class="spacer"></span>
+                <button mat-button (click)="cancelar()">Cancelar</button>
+              </div>
+            </mat-card-actions>
+          </form>
+        </div>
+        <div class="image-preview">
+          <mat-card>
+            <mat-card-header>
+              <mat-icon>favorite_border</mat-icon>
+            </mat-card-header>
+            <mat-card-content>
+              <img *ngIf="imagemUrl" [src]="imagemUrl" alt="Imagem do Produto">
+              <div *ngIf="!imagemUrl">Coloque sua imagem aqui</div>
+            </mat-card-content>
+            <mat-card-actions>
+              <input type="file" (change)="onFileChange($event)">
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </mat-card>
+      <mat-error *ngIf="">
+        Erro ao fazer login. Verifique suas credenciais.
+      </mat-error>
+    </section>
+</app-container>
