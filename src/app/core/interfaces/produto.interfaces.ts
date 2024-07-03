@@ -6,3 +6,11 @@ export interface ProdutoCard {
     imagemPath: string
     isFavoritado: boolean
 }
+
+export interface ProdutoScrap {
+    descricao: string
+    valor: string
+    valorConvertido: number
+    imagemPath: string
+    plataforma: string
+}

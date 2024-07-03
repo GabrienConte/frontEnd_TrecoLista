@@ -9,27 +9,33 @@
             <mat-card-content>
               <mat-form-field appearance="outline">
                 <mat-label>Link</mat-label>
-                <input matInput formControlName="link" placeholder="Digite o link do produto">
+                <input matInput formControlName="link" (blur)="onLinkBlur()" placeholder="Digite o link do produto">
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Plataforma</mat-label>
-                <mat-select>
-                  @for (food of foods; track food) {
-                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-                  }
-                </mat-select>
+                <mat-label>Descrição</mat-label>
+                <input matInput formControlName="descricao" readonly>
               </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>Categoria</mat-label>
-                <mat-select>
-                  @for (food of foods; track food) {
-                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-                  }
-                </mat-select>
-              </mat-form-field>
+              <div class="agrupa-itens">
+                <mat-form-field appearance="outline">
+                  <mat-label>Plataforma</mat-label>
+                  <mat-select formControlName="plataforma">
+                    <mat-option *ngFor="let plataforma of plataformas" [value]="plataforma">
+                      {{ plataforma.descricao }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Categoria</mat-label>
+                  <mat-select>
+                    @for (categ of categorias; track categ.id) {
+                      <mat-option [value]="categ.id">{{categ.descricao}}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
               <mat-form-field appearance="outline">
                 <mat-label>Valor</mat-label>
-                <input matInput formControlName="valor" type="number" placeholder="Digite o valor do produto">
+                <input matInput formControlName="valor" type="number" readonly>
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Prioriade</mat-label>
@@ -52,7 +58,7 @@
         <div class="image-preview">
           <mat-card>
             <mat-card-header>
-              <mat-icon>favorite_border</mat-icon>
+              <mat-icon>favorite</mat-icon>
             </mat-card-header>
             <mat-card-content>
               <img *ngIf="imagemUrl" [src]="imagemUrl" alt="Imagem do Produto">

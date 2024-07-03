@@ -11,6 +11,13 @@ import { Router } from '@angular/router';
 import { ContainerComponent } from "../../shared/components/container/container.component";
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Plataforma } from '../../core/interfaces/plataforma.interface';
+import { Categoria } from '../../core/interfaces/categoria.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProdutoService } from '../../core/services/produto.service';
+import { PlataformaService } from '../../core/services/plataforma.service';
+import { CategoriaService } from '../../core/services/categoria.service';
+import { ImagemService } from '../../core/services/imagem.service';
 
 interface Food {
   value: string;
@@ -37,30 +44,48 @@ interface Food {
 })
 export class ProdutoFormComponent implements OnInit{
   @Input() acaoForm : 'Criar' | 'Editar' = 'Criar';
+  
   produtoForm!: FormGroup;
-  plataformas = ['Plataforma 1', 'Plataforma 2', 'Plataforma 3'];
-  categorias = ['Categoria 1', 'Categoria 2', 'Categoria 3'];
+  categorias: Categoria[] = [];
+  plataformas: Plataforma[] = [];
+  
   imagemUrl: string | ArrayBuffer | null = null;
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
 
   constructor(
     private fb: FormBuilder, 
-    private router: Router, 
+    private router: Router,
+    private snackBar: MatSnackBar, 
+    private produtoService: ProdutoService,
+    private plataformaService: PlataformaService,
+    private categoriaService: CategoriaService,
+    private imagemService: ImagemService,
     private location: Location) 
-  { }
-
-  ngOnInit(): void {
+  { 
     this.produtoForm = this.fb.group({
       link: ['', Validators.required],
-      plataforma: ['', Validators.required],
+      descricao: ['', Validators.required],
+      plataforma: [null, Validators.required],
       categoria: ['', Validators.required],
       valor: ['', [Validators.required, Validators.min(0)]],
       prioridade: [0, [Validators.min(0), Validators.max(100)]],
       imagem: [null, Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+    this.carregaCategorias();
+    this.carregarPlataformas();
+  }
+
+  carregaCategorias() {
+    this.categoriaService.carregarCategorias().subscribe((categorias) => {
+      this.categorias = categorias;
+    });
+  }
+
+  carregarPlataformas() {
+    this.plataformaService.carregarPlataformas().subscribe((plataformas) => {
+      this.plataformas = plataformas;
     });
   }
 
@@ -80,10 +105,27 @@ export class ProdutoFormComponent implements OnInit{
     }
   }
 
+  onLinkBlur() {
+    const link = this.produtoForm.get('link')?.value;
+    if (link) {
+      this.produtoService.carregarProdutoDetalheScrap(link).subscribe((data) => {
+        this.produtoForm.patchValue({
+          descricao: data.descricao,
+          plataforma: this.plataformas.find(plataforma => plataforma.descricao == data.plataforma) || null,
+          valor: data.valorConvertido,
+        });
+        if (data.imagemPath) {
+          this.imagemUrl = this.imagemService.getImagemUrl(data.imagemPath);
+        }
+      });
+    }
+  }
+
   onSubmit() {
     if (this.produtoForm.valid) {
       console.log(this.produtoForm.value);
       // Implementar a lógica de envio do formulário
+      this.snackBar.open("Sucesso ao criar o novo produto", "OK");
     }
   }
 
