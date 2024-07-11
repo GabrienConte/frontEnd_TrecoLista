@@ -1,5 +1,7 @@
 <mat-card class="card">
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <div class="image-preview">
+    <img mat-card-image src="{{produto.imagemPath}}" alt="Photo of a Shiba Inu">
+  </div>
   <mat-card-header>
     <mat-card-title>
       R$ {{produto.valor}}
@@ -9,8 +11,8 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions>
-    <button mat-fab extended color="accent" class="detalhe-botao">
-      Detalhes
+    <button mat-fab extended color="accent" class="detalhe-botao"  (click)="onDetalhe()">
+        Detalhes
       <mat-icon>info</mat-icon>
     </button>
     <button mat-icon-button (click)="toggleFavorite()">

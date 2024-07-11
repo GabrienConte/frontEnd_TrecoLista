@@ -6,7 +6,7 @@
             <button *ngIf="variantType === 'emLinha'" mat-icon-button class="nav-button " aria-label="Previous" (click)="scrollLeft()">
                 <mat-icon>chevron_left</mat-icon>
             </button>
-            <div class="product-list">
+            <div class="product-list" #produtoLista>
                 @for (produto of produtos; track produto.produtoId) {
                     <app-card-product [produto]="produto"> </app-card-product>
                 }

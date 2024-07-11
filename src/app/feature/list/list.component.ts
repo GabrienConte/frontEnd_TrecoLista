@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
@@ -32,19 +32,22 @@ export class ListComponent implements OnInit {
   @Input() variantLabel: 'Outros Produtos' | 'Meus Produtos' | 'Todos os Produtos' = 'Todos os Produtos';
   @Input() variantType: 'emLinha' | 'emGrade' = 'emLinha';
   produtos: ProdutoCard[] = [];
+  @ViewChild('produtoLista') produtoLista!: ElementRef<HTMLDivElement>;
 
   constructor( private serviceProduto: ProdutoService){
 
   }
 
   scrollLeft() {
-    const container = document.querySelector('.product-list');
-    container?.scrollBy({ left: -200, behavior: 'smooth' });
+    if (this.produtoLista) {
+      this.produtoLista.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });
+    }
   }
 
   scrollRight() {
-    const container = document.querySelector('.product-list');
-    container?.scrollBy({ left: 200, behavior: 'smooth' });
+    if (this.produtoLista) {
+      this.produtoLista.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
+    }
   }
 
   ngOnInit() {

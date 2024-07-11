@@ -9,46 +9,50 @@
             <mat-card-content>
               <mat-form-field appearance="outline">
                 <mat-label>Link</mat-label>
-                <input matInput formControlName="link" (blur)="onLinkBlur()" placeholder="Digite o link do produto">
+                <input matInput formControlName="link" [readonly]="acaoForm !== 'Criar'" (blur)="onLinkBlur()" placeholder="Digite o link do produto">
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Descrição</mat-label>
-                <input matInput formControlName="descricao" readonly>
+                <input matInput formControlName="descricao" [readonly]="acaoForm !== 'Criar'" [readonly]="!isOutraPlataforma">
               </mat-form-field>
               <div class="agrupa-itens">
                 <mat-form-field appearance="outline">
                   <mat-label>Plataforma</mat-label>
-                  <mat-select formControlName="plataforma">
+                  <mat-select formControlName="plataforma" [disabled]="acaoForm !== 'Criar'" (selectionChange)="onPlataformaChange($event)">
                     <mat-option *ngFor="let plataforma of plataformas" [value]="plataforma">
                       {{ plataforma.descricao }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                  <mat-label>Categoria</mat-label>
-                  <mat-select>
-                    @for (categ of categorias; track categ.id) {
-                      <mat-option [value]="categ.id">{{categ.descricao}}</mat-option>
-                    }
-                  </mat-select>
+                  <mat-label>Valor</mat-label>
+                  <input matInput formControlName="valor" [readonly]="acaoForm !== 'Criar'" type="number" [readonly]="!isOutraPlataforma">
                 </mat-form-field>
               </div>
               <mat-form-field appearance="outline">
-                <mat-label>Valor</mat-label>
-                <input matInput formControlName="valor" type="number" readonly>
-              </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>Prioriade</mat-label>
-                <mat-select>
-                    <mat-option [value]="1">Baixa</mat-option>
-                    <mat-option [value]="5">Média</mat-option>
-                    <mat-option [value]="10">Alta</mat-option>
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="categoria" [disabled]="acaoForm === 'Detalhes'">
+                  <mat-option *ngFor="let categ of categorias" [value]="categ">
+                    {{ categ.descricao }}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
+              <div class="agrupa-itens" *ngIf="acaoForm !== 'Detalhes'">
+                <mat-form-field appearance="outline">
+                  <mat-label>Prioridade</mat-label>
+                  <mat-select formControlName="prioridade">
+                      <mat-option [value]="1">Baixa</mat-option>
+                      <mat-option [value]="5">Média</mat-option>
+                      <mat-option [value]="10">Alta</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-checkbox formControlName="isAvisado" *ngIf="!isOutraPlataforma">Quer ser avisado ao mudança de preço?</mat-checkbox>
+                <input type="hidden" formControlName="imagemPath">
+              </div>
             </mat-card-content>
             <mat-card-actions>
               <div class="button-row">
-                <button mat-raised-button color="primary" type="submit" [disabled]="produtoForm.invalid">Salvar</button>
+                <button *ngIf="acaoForm !== 'Detalhes'" mat-raised-button color="primary" type="submit">Salvar</button>
                 <span class="spacer"></span>
                 <button mat-button (click)="cancelar()">Cancelar</button>
               </div>
@@ -58,20 +62,17 @@
         <div class="image-preview">
           <mat-card>
             <mat-card-header>
-              <mat-icon>favorite</mat-icon>
+              <mat-icon>{{ acaoForm !== 'Detalhes' ? 'favorite' : 'favorite_border' }}</mat-icon>
             </mat-card-header>
             <mat-card-content>
               <img *ngIf="imagemUrl" [src]="imagemUrl" alt="Imagem do Produto">
               <div *ngIf="!imagemUrl">Coloque sua imagem aqui</div>
             </mat-card-content>
             <mat-card-actions>
-              <input type="file" (change)="onFileChange($event)">
+              <input type="file" (change)="onFileChange($event)" *ngIf="isOutraPlataforma">
             </mat-card-actions>
           </mat-card>
         </div>
       </mat-card>
-      <mat-error *ngIf="">
-        Erro ao fazer login. Verifique suas credenciais.
-      </mat-error>
     </section>
 </app-container>

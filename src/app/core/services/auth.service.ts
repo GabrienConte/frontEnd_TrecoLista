@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 import { UsuarioService } from './usuario.service';
 
 interface AuthResponse {
-  access_token: string
+  token_access: string
 }
 
 @Injectable({
@@ -27,7 +27,7 @@ export class AuthService {
       authData,
     {observe: 'response'}).pipe(
       tap((response) => {
-        const authtoken = response.body?.access_token || '';
+        const authtoken = response.body?.token_access || '';
         this.usuarioService.salvarToken(authtoken);
       })
     );

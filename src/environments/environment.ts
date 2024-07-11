@@ -1,4 +1,4 @@
 export const environment = {
-    apiUrl: 'https://localhost:7213/api/v1',
-    imageUrl: 'https://localhost:7213/storage'
+    apiUrl: 'http://localhost:5075/api/v1',
+    imageUrl: 'http://localhost:5075/storage'
 };
