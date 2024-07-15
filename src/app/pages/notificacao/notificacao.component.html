@@ -1,7 +1,7 @@
 <section class="notificacao">
-    <ng-container *ngIf="notifications.length > 0; else noNotifications">
+    <ng-container *ngIf="notificacoes.length > 0; else noNotifications">
         <mat-list>
-          <mat-list-item *ngFor="let notification of notifications">
+          <mat-list-item *ngFor="let notification of notificacoes">
             <h3 mat-line>{{ notification.title }}</h3>
             <p mat-line>{{ notification.message }}</p>
           </mat-list-item>

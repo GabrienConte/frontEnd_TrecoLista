@@ -18,7 +18,9 @@ import { ProdutoService } from '../../core/services/produto.service';
 import { PlataformaService } from '../../core/services/plataforma.service';
 import { CategoriaService } from '../../core/services/categoria.service';
 import { ActivatedRoute } from '@angular/router';
-import { Produto, ProdutoFavoritado } from '../../core/interfaces/produto.interfaces';
+import { Produto, ProdutoFavoritado, ProdutoUpdate } from '../../core/interfaces/produto.interfaces';
+import { FavoritoService } from '../../core/services/favorito.service';
+import { Favorito } from '../../core/interfaces/favorito.interface';
 
 @Component({
     selector: 'app-produto-form',
@@ -56,6 +58,7 @@ export class ProdutoFormComponent implements OnInit{
     private produtoService: ProdutoService,
     private plataformaService: PlataformaService,
     private categoriaService: CategoriaService,
+    private favoritoService: FavoritoService,
     private location: Location,
     private route: ActivatedRoute) 
   { 
@@ -75,7 +78,7 @@ export class ProdutoFormComponent implements OnInit{
   }
 
   carregaCategorias() {
-    this.categoriaService.carregarCategorias().subscribe((categorias) => {
+    this.categoriaService.carregarCategoriasAtivas().subscribe((categorias) => {
       this.categorias = categorias;
     });
   }
@@ -109,7 +112,34 @@ export class ProdutoFormComponent implements OnInit{
           }
         });
       }
+      
     }
+  }
+
+  toggleFavorite() {
+    if (this.acaoForm === 'Editar') {
+      // Desfavoritar o produto
+      const favorito: Favorito = {
+        produtoId: Number(this.produtoId),
+        // Outros campos necessários para identificar o produto
+      };
+
+      this.favoritoService.desfavoritarProduto(favorito).subscribe(() => {
+        this.snackBar.open('Produto desfavoritado!', "Ok");
+        this.acaoForm = 'Detalhes';
+      });
+    } else if (this.acaoForm === 'Detalhes') {
+      // Favoritar o produto
+      const favorito: Favorito = {
+        produtoId: Number(this.produtoId),
+        // Outros campos necessários para identificar o produto
+      };
+
+      this.favoritoService.favoritarProduto(favorito).subscribe(() => {
+        this.snackBar.open('Produto favoritado!', "Ok");
+        this.acaoForm = 'Editar';
+      });
+    }  
   }
 
   atualizarFormulario(produto: Produto | ProdutoFavoritado) {
@@ -128,6 +158,7 @@ export class ProdutoFormComponent implements OnInit{
       this.imagemUrl = produto.imagemPath;
     }
     this.updateFieldStates();
+    this.disableFields();
   }
 
   onFileChange(event: any) {
@@ -176,6 +207,7 @@ export class ProdutoFormComponent implements OnInit{
           this.imagemUrl = data.imagemPath;
         }
         this.updateFieldStates();
+        this.disableFields();
       });
     }
   }
@@ -184,31 +216,56 @@ export class ProdutoFormComponent implements OnInit{
     return value.toFixed(2).replace('.', ',');
   }
 
+  disableFields() {
+    this.produtoForm.get('plataforma')?.disable();
+    if(this.acaoForm !== 'Criar')
+      this.produtoForm.get('categoria')?.disable();
+  }
+
   onSubmit() {
     if (this.produtoForm.valid) {
-      const formData = new FormData();
-      formData.append('link', this.produtoForm.get('link')?.value);
-      formData.append('descricao', this.produtoForm.get('descricao')?.value);
-      formData.append('plataformaId', this.produtoForm.get('plataforma')?.value.id);
-      formData.append('categoriaId', this.produtoForm.get('categoria')?.value.id);
-      formData.append('valor', this.formatValue(this.produtoForm.get('valor')?.value));
-      formData.append('prioridade', this.produtoForm.get('prioridade')?.value);
-      formData.append('isAvisado', this.produtoForm.get('isAvisado')?.value);
-      formData.append('imagemPath', this.produtoForm.get('imagemPath')?.value);
-
-      if (this.produtoForm.get('imagem')?.value) {
-        formData.append('imagem', this.produtoForm.get('imagem')?.value);
-      }
-
-      this.produtoService.criarProduto(formData).subscribe({
-        next: () => {
-          this.snackBar.open("Sucesso ao criar o novo produto", "OK");
-          this.cancelar();
-        }, 
-        error: () => {
-          this.snackBar.open("Erro ao criar o produto", "OK");
+      if(this.acaoForm === 'Criar') {
+        const formData = new FormData();
+        formData.append('link', this.produtoForm.get('link')?.value);
+        formData.append('descricao', this.produtoForm.get('descricao')?.value);
+        formData.append('plataformaId', this.produtoForm.get('plataforma')?.value.id);
+        formData.append('categoriaId', this.produtoForm.get('categoria')?.value.id);
+        formData.append('valor', this.formatValue(this.produtoForm.get('valor')?.value));
+        formData.append('prioridade', this.produtoForm.get('prioridade')?.value);
+        formData.append('isAvisado', this.produtoForm.get('isAvisado')?.value);
+        formData.append('imagemPath', this.produtoForm.get('imagemPath')?.value);
+  
+        if (this.produtoForm.get('imagem')?.value) {
+          formData.append('imagem', this.produtoForm.get('imagem')?.value);
         }
-      });
+  
+        this.produtoService.criarProduto(formData).subscribe({
+          next: () => {
+            this.snackBar.open("Sucesso ao criar o novo produto", "OK");
+            this.cancelar();
+          }, 
+          error: () => {
+            this.snackBar.open("Erro ao criar o produto", "OK");
+          }
+        });
+      }  else if (this.acaoForm === 'Editar' && this.produtoId) {
+
+        const produtoUpdate: ProdutoUpdate = {
+          plataformaId: this.produtoForm.get('plataforma')?.value.id,
+          prioridade: this.produtoForm.get('prioridade')?.value,
+          isAvisado: this.produtoForm.get('isAvisado')?.value,
+        };
+
+        this.produtoService.atualizarProduto(this.produtoId, produtoUpdate).subscribe({
+          next: () => {
+            this.snackBar.open("Sucesso ao atualizar o novo produto", "OK");
+            this.cancelar();
+          }, 
+          error: () => {
+            this.snackBar.open("Erro ao atualizar o produto", "OK");
+          }
+        });
+      }
     }
   }
 

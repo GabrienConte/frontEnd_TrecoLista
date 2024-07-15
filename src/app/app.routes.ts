@@ -9,6 +9,9 @@ import { authGuard } from './core/guards/auth.guard';
 import { MeusProdutosComponent } from './pages/meus-produtos/meus-produtos.component';
 import { ProdutoFormComponent } from './pages/produto-form/produto-form.component';
 import { CategoriaFormComponent } from './pages/categoria-form/categoria-form.component';
+import { AdministradorComponent } from './pages/administrador/administrador.component';
+import { adminGuard } from './core/guards/admin.guard';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -20,5 +23,9 @@ export const routes: Routes = [
     { path: 'produto-form/:id',component: ProdutoFormComponent, canActivate: [authGuard] },
     { path: 'meuPerfil', component: MeuPerfilComponent, canActivate: [authGuard] },
     { path: 'categoria', component: CategoriasComponent, canActivate: [authGuard]},
-    { path: 'categoria-form', component: CategoriaFormComponent, canActivate: [authGuard]}
+    { path: 'categoria-form', component: CategoriaFormComponent, canActivate: [authGuard]},
+    { path: 'categoria-form/:id', component: CategoriaFormComponent, canActivate: [authGuard]},
+    { path: 'admin', component: AdministradorComponent, canActivate: [adminGuard] },
+    { path: 'unauthorized', component: UnauthorizedComponent }
+
 ];

@@ -10,3 +10,8 @@ export interface UsuarioUpdate {
   email: string;
   login: string;
 }
+
+export interface UsuarioToken {
+  usuario_id: number;
+  tipo_usuario: string
+}

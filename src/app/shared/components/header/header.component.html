@@ -4,7 +4,7 @@
         <span class="spacer"></span>
         <ng-container *ngIf="usuarioService.estaLogado(); else SemLogin">
           <a class="link-header" mat-button routerLink="/home">Inicio</a>
-          <a class="link-header" mat-button routerLink="/meusProdutos">Meus Favoritos</a>
+          <a class="link-header" mat-button routerLink="/meusProdutos">Meus Trecos Favoritos</a>
           <a class="link-header" mat-button routerLink="/categoria">Categoria</a>
           <span class="spacer"></span>
           <button mat-icon-button aria-label="Notificações" [matMenuTriggerFor]="menuNotificacao">
@@ -20,6 +20,10 @@
             <a mat-menu-item routerLink="/meuPerfil">
               <mat-icon>manage_accounts</mat-icon>
               <span>Meu Perfil</span>
+            </a>
+            <a mat-menu-item *ngIf="usuarioService.isAdmin()" routerLink="/admin">
+              <mat-icon>admin_panel_settings</mat-icon>
+              <span>Administrador</span>
             </a>
             <a>
               <p></p>

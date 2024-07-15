@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Produto, ProdutoCard, ProdutoFavoritado, ProdutoScrap } from '../interfaces/produto.interfaces';
+import { Produto, ProdutoCard, ProdutoFavoritado, ProdutoScrap, ProdutoUpdate } from '../interfaces/produto.interfaces';
 import { environment } from '../../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -66,7 +66,15 @@ export class ProdutoService {
     return this.httpClient.post<ProdutoScrap>(`${this.apiUrl}/produto/produtoScrap`, { link } );
   }
 
+  atualizaPrecoProdutosScrap(): Observable<any> {
+    return this.httpClient.post<any>(`${this.apiUrl}/produto/atualizarPrecosFavoritos`,  null );
+  }
+
   criarProduto(formData: FormData): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/produto`, formData);
+  }
+
+  atualizarProduto(id: string, produtoUpdateDto: ProdutoUpdate): Observable<ProdutoUpdate> {
+    return this.httpClient.put<ProdutoUpdate>(`${this.apiUrl}/produto/${id}`, produtoUpdateDto);
   }
 }

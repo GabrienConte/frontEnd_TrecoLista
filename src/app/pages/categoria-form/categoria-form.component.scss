@@ -1,0 +1,79 @@
+.form-categoria-component {
+    max-width: 70%;
+    min-height: 70%;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+
+    .form-categoria {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 68px;
+      background-color: hsla(208, 100%, 97%, 0.250);
+      border-radius: 12px;
+    }
+
+    .form-container {
+        display: flex;
+        min-width: 60%;
+        flex-direction: column;
+        padding-bottom: 16px;
+        padding-top: 16px;
+
+      mat-card-header {
+        margin-bottom: 24px;
+        margin-top: 24px;
+        justify-content: center;
+  
+        mat-card-title {
+          font-size: 32px;
+          font-weight: 400;
+          font-family: "Oxygen Mono", monospace;
+        }
+      }
+  
+      mat-card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+  
+      mat-card-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: normal;
+  
+        button {
+          margin: 0 8px;
+          margin-bottom: 16px;
+        }
+      }
+  
+      p {
+        font-size: 16px;
+        font-weight: 500;
+      }
+  
+      a {
+        cursor: pointer;
+  
+        &:active {
+          color: #26a6e1;
+        }
+      }
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+    .button-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 16px;
+    }  
+}

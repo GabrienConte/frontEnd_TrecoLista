@@ -1,1 +1,29 @@
-<p>categoria-form works!</p>
+<app-container>
+    <section class="form-categoria-component">
+        <mat-card class="form-categoria">
+            <div class="form-container">
+                <mat-card-header>
+                    <mat-card-title class="card-title">{{acaoForm}} Categoria</mat-card-title>
+                </mat-card-header>
+                <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()">
+                    <mat-card-content>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Descrição</mat-label>
+                            <input matInput formControlName="descricao" placeholder="Digite a descrição da categoria">
+                        </mat-form-field>
+                        <mat-checkbox formControlName="ativo">
+                            Ativa
+                        </mat-checkbox>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <div class="button-row">
+                            <button mat-raised-button color="primary" type="submit">Salvar</button>
+                            <span class="spacer"></span>
+                            <button mat-button (click)="cancelar()">Cancelar</button>
+                          </div>
+                    </mat-card-actions>
+                </form>
+            </div>
+        </mat-card>
+    </section>
+</app-container>

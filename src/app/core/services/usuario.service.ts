@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Usuario, UsuarioUpdate } from '../interfaces/usuario.interfaces';
+import { Usuario, UsuarioToken, UsuarioUpdate } from '../interfaces/usuario.interfaces';
 import { environment } from '../../../environments/environment';
 import { TokenService } from './token.service';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class UsuarioService {
 
   private apiUrl: string = environment.apiUrl;
 
-  private userSubject = new BehaviorSubject<Usuario | null>(null);
+  private userSubject = new BehaviorSubject<UsuarioToken | null>(null);
 
-  constructor(private httpClient: HttpClient, private tokenService: TokenService) {
+  constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router) {
     if(this.tokenService.possuiToken()) {
       this.decodificarJWT();
     }
@@ -23,11 +24,11 @@ export class UsuarioService {
 
   decodificarJWT() {
     const token = this.tokenService.retornarToken();
-    const user = jwtDecode(token) as Usuario;
+    const user = jwtDecode(token) as UsuarioToken;
     this.userSubject.next(user);
   }
 
-  retornaUser() {
+  retornaUser(): Observable<UsuarioToken | null> {
     return this.userSubject.asObservable();
   }
 
@@ -43,6 +44,20 @@ export class UsuarioService {
 
   estaLogado() {
     return this.tokenService.possuiToken();
+  }
+
+  isAdmin(): boolean {
+    const user = this.userSubject.value;
+    return user?.tipo_usuario === 'ADMIN';
+  }
+
+  canActivateAdmin(): boolean {
+    if (this.isAdmin()) {
+      return true;
+    } else {
+      this.router.navigate(['/unauthorized']);
+      return false;
+    }
   }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {

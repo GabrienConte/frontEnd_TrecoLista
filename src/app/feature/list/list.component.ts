@@ -29,7 +29,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ListComponent implements OnInit {
   @Input() variantList: 'otherProdutos' | 'myProdutos' | 'allProdutos' = 'allProdutos';
-  @Input() variantLabel: 'Outros Produtos' | 'Meus Produtos' | 'Todos os Produtos' = 'Todos os Produtos';
+  @Input() variantLabel: 'Outros Produtos' | 'Meus Trecos' | 'Todos os Trecos' = 'Todos os Trecos';
   @Input() variantType: 'emLinha' | 'emGrade' = 'emLinha';
   produtos: ProdutoCard[] = [];
   @ViewChild('produtoLista') produtoLista!: ElementRef<HTMLDivElement>;

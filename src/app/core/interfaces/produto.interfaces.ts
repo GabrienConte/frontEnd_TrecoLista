@@ -8,6 +8,13 @@ export interface Produto {
     plataformaId: number
 }
 
+export interface ProdutoUpdate {
+
+    plataformaId: number
+    prioridade: number 
+    isAvisado: boolean
+}
+
 export interface ProdutoFavoritado extends Produto {
     prioridade: number 
     aviso: boolean

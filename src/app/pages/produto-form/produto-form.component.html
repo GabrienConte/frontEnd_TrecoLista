@@ -18,7 +18,7 @@
               <div class="agrupa-itens">
                 <mat-form-field appearance="outline">
                   <mat-label>Plataforma</mat-label>
-                  <mat-select formControlName="plataforma" [disabled]="acaoForm !== 'Criar'" (selectionChange)="onPlataformaChange($event)">
+                  <mat-select formControlName="plataforma" (selectionChange)="onPlataformaChange($event)">
                     <mat-option *ngFor="let plataforma of plataformas" [value]="plataforma">
                       {{ plataforma.descricao }}
                     </mat-option>
@@ -31,7 +31,7 @@
               </div>
               <mat-form-field appearance="outline">
                 <mat-label>Categoria</mat-label>
-                <mat-select formControlName="categoria" [disabled]="acaoForm === 'Detalhes'">
+                <mat-select formControlName="categoria">
                   <mat-option *ngFor="let categ of categorias" [value]="categ">
                     {{ categ.descricao }}
                   </mat-option>
@@ -62,7 +62,9 @@
         <div class="image-preview">
           <mat-card>
             <mat-card-header>
-              <mat-icon>{{ acaoForm !== 'Detalhes' ? 'favorite' : 'favorite_border' }}</mat-icon>
+              <button mat-icon-button (click)="toggleFavorite()">
+                <mat-icon>{{ acaoForm !== 'Detalhes' ? 'favorite' : 'favorite_border' }}</mat-icon>
+              </button>
             </mat-card-header>
             <mat-card-content>
               <img *ngIf="imagemUrl" [src]="imagemUrl" alt="Imagem do Produto">

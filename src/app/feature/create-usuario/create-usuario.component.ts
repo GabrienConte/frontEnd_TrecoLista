@@ -36,7 +36,7 @@ export class CreateUsuarioComponent implements OnInit{
       email: ['', [Validators.required, Validators.email]],
       senha: ['', Validators.required],
       login: ['', Validators.required],
-      tipoUsuario: ['cliente']
+      tipoUsuario: ['CLIENTE']
     });;
   }
 

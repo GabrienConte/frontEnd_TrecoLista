@@ -3,3 +3,8 @@ export interface Categoria {
     descricao: string,
     ativo: boolean
 }
+
+export interface CategoriaSalvar {
+    descricao: string,
+    ativo: boolean
+}

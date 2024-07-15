@@ -21,7 +21,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './action-container.component.scss'
 })
 export class ActionContainerComponent {
-  @Input() variantLabels: 'Produto' | 'Categoria' = 'Produto';
+  @Input() variantLabels: 'Treco' | 'Categoria' = 'Treco';
 
 
   searchProducts(event: Event) {

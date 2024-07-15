@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule } from "@angular/material/toolbar"
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { NotificacaoService } from '../../../core/services/notificacao.service';
 import { Notificacao } from '../../../core/interfaces/notificacao.interface';
 import { NotificacaoComponent } from "../../../pages/notificacao/notificacao.component";
+import { UsuarioToken } from '../../../core/interfaces/usuario.interfaces';
 
 @Component({
     selector: 'app-header',
@@ -29,13 +30,16 @@ import { NotificacaoComponent } from "../../../pages/notificacao/notificacao.com
         NotificacaoComponent
     ]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   router = inject(Router);
-
   matSnackBar = inject(MatSnackBar);
 
   constructor(public usuarioService: UsuarioService) {}
 
+  ngOnInit(): void {
+
+  }
+  
   logout() {
     this.usuarioService.logout();
     this.matSnackBar.open("Deslogado com sucesso!", "Ok");

@@ -25,13 +25,14 @@
     }
     
     .image-preview { 
+        display: flex;
         align-items: center;
         max-width: 100%;
-        max-height: 60%;
+        max-height: 200px;
         
         img {
             max-width: 100%;
-            max-height: 60%;
+            max-height: 180px;
             width: auto;
             height: auto;
             margin: 0 auto;
