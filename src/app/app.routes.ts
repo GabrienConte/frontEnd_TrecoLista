@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: 'registro', component: CreateUsuarioComponent },
     { path: 'home', component: HomeComponent, canActivate: [authGuard] },
     { path: 'meusProdutos', component: MeusProdutosComponent, canActivate: [authGuard] },
-    { path: 'produto-form',component: ProdutoFormComponent, canActivate: [authGuard] },
+    { path: 'treco-form',component: ProdutoFormComponent, canActivate: [authGuard] },
     { path: 'produto-form/:id',component: ProdutoFormComponent, canActivate: [authGuard] },
     { path: 'meuPerfil', component: MeuPerfilComponent, canActivate: [authGuard] },
     { path: 'categoria', component: CategoriasComponent, canActivate: [authGuard]},

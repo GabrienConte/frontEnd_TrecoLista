@@ -1,6 +1,6 @@
 <app-container>
-    <app-action-container [variantLabels]="'Treco'">
+    <app-action-container [variantLabels]="'Treco'" (searchEvent)="aplicarFiltro($event)"s>
     </app-action-container>  
-    <app-list [variantType]="'emGrade'" [variantList]="'myProdutos'" [variantLabel]="'Meus Trecos'">
+    <app-list #myProdutosComponent [variantType]="'emGrade'" [variantList]="'myProdutos'" [variantLabel]="'Meus Trecos'">
     </app-list>
 </app-container>

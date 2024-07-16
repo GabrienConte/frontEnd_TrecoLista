@@ -32,10 +32,19 @@ export class ListComponent implements OnInit {
   @Input() variantLabel: 'Outros Produtos' | 'Meus Trecos' | 'Todos os Trecos' = 'Todos os Trecos';
   @Input() variantType: 'emLinha' | 'emGrade' = 'emLinha';
   produtos: ProdutoCard[] = [];
+  produtosFiltrados: ProdutoCard[] = [];
   @ViewChild('produtoLista') produtoLista!: ElementRef<HTMLDivElement>;
 
   constructor( private serviceProduto: ProdutoService){
 
+  }
+
+  aplicarFiltro(termo: string): void {
+    console.log(termo);
+    termo = termo.trim().toLowerCase();
+    this.produtosFiltrados = this.produtos.filter(produto =>
+      produto.descricao.toLowerCase().includes(termo)
+    );
   }
 
   scrollLeft() {
@@ -51,16 +60,31 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.serviceProduto.carregarProdutosNaoFavoritados();
+    this.serviceProduto.carregarProdutosFavoritados();
     switch (this.variantList) {
       case 'allProdutos':
-        this.serviceProduto.produtosNaoFavoritados$.subscribe(produtos => this.produtos = produtos);
+        this.serviceProduto.produtosNaoFavoritados$.subscribe(produtos => {
+          this.produtos = produtos;
+          this.produtosFiltrados = produtos; // Inicialmente, produtos filtrados são os não favoritados
+        });
       break;
       case 'myProdutos':
-        this.serviceProduto.produtosFavoritados$.subscribe(produtos => this.produtos = produtos);
+        this.serviceProduto.produtosFavoritados$.subscribe(produtos => {
+          this.produtos = produtos;
+          this.produtosFiltrados = produtos; // Inicialmente, produtos filtrados são os favoritados
+        });
       break;
       case 'otherProdutos':
-        this.serviceProduto.produtosNaoFavoritados$.subscribe(produtos => this.produtos = produtos);
+        this.serviceProduto.produtosNaoFavoritados$.subscribe(produtos => {
+          this.produtos = produtos;
+          this.produtosFiltrados = produtos; // Inicialmente, produtos filtrados são os não favoritados
+        });
       break;
     }
+  }
+
+  trackByProdutoId(index: number, produto: ProdutoCard): number {
+    return produto.produtoId; // Retorna o ID único do produto como identificador de rastreamento
   }
 }

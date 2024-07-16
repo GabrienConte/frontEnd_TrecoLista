@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,10 +22,10 @@ import { RouterLink } from '@angular/router';
 })
 export class ActionContainerComponent {
   @Input() variantLabels: 'Treco' | 'Categoria' = 'Treco';
+  @Output() searchEvent = new EventEmitter<string>();
 
-
-  searchProducts(event: Event) {
-    const input = event.target as HTMLInputElement;
-    // Lógica para buscar produtos
+  searchItens(event: Event) {
+    const input = (event.target as HTMLInputElement).value.trim();
+    this.searchEvent.emit(input);
   }
 }

@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { TokenService } from './token.service';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
+import { ProdutoService } from './produto.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UsuarioService {
 
   private userSubject = new BehaviorSubject<UsuarioToken | null>(null);
 
-  constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router) {
+  constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router, private produtoService: ProdutoService) {
     if(this.tokenService.possuiToken()) {
       this.decodificarJWT();
     }
@@ -40,6 +41,7 @@ export class UsuarioService {
   logout() {
     this.tokenService.removerToken();
     this.userSubject.next(null);
+    this.produtoService.limparProdutos();
   }
 
   estaLogado() {

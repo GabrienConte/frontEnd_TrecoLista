@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContainerComponent } from '../../shared/components/container/container.component';
 import { ListComponent } from '../../feature/list/list.component';
 import { MatInputModule } from '@angular/material/input';
@@ -28,5 +28,11 @@ import { ActionContainerComponent } from '../../shared/components/action-contain
 })
 export class HomeComponent {
 
-  
+  @ViewChild('allProdutosComponent') allProdutosComponent!: ListComponent;
+  @ViewChild('myProdutosComponent') myProdutosComponent!: ListComponent;
+
+  aplicarFiltro(textoBusca: string): void {
+    this.allProdutosComponent.aplicarFiltro(textoBusca);
+    this.myProdutosComponent.aplicarFiltro(textoBusca);
+  }
 }

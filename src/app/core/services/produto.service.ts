@@ -35,6 +35,11 @@ export class ProdutoService {
     });
   }
 
+  limparProdutos(): void {
+    this.produtosNaoFavoritadosSubject.next([]); 
+    this.produtosFavoritadosSubject.next([]); 
+  }
+
   get produtosNaoFavoritados$(): Observable<ProdutoCard[]> {
     return this.produtosNaoFavoritadosSubject.asObservable()
     

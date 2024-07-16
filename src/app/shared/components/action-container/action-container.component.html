@@ -2,7 +2,7 @@
     <div class="action-container">
         <mat-form-field appearance="outline" class="search-input">
             <mat-label>Buscar</mat-label>
-            <input matInput (input)="searchProducts($event)" placeholder="Procurar {{variantLabels}}">
+            <input matInput (input)="searchItens($event)" placeholder="Procurar {{variantLabels}}">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <a mat-raised-button color="accent" [routerLink]="['/' + variantLabels.toLocaleLowerCase() + '-form']" >Criar {{variantLabels}}</a>

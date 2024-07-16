@@ -56,4 +56,12 @@ export class CategoriasComponent implements AfterViewInit  {
   editarCategoria(id: number) {
     this.router.navigate(['/categoria-form', id], { queryParams: { acaoForm: 'Editar'} });
   }
+
+  aplicarFiltro(textoBusca: string): void {
+    console.log('Filtrando por:', textoBusca);
+    this.dataSource.filter = textoBusca.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
