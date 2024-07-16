@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -25,11 +25,18 @@ import { WebsocketService } from './core/services/websocket.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-
-  constructor(private websocketService: WebsocketService) {}
+export class AppComponent implements OnInit, OnDestroy {
+  private webSocketService: WebsocketService
+  
+  constructor(private websocketService: WebsocketService) {
+    this.webSocketService = websocketService;
+  }
 
   ngOnInit(): void {
-    // Inicializa o serviço WebSocket quando o componente for inicializado
+    this.webSocketService.start();
+  }
+
+  ngOnDestroy(): void {
+    this.webSocketService.stop();
   }
 }

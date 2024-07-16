@@ -9,42 +9,51 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class WebsocketService {
-  private socket!: WebSocket;
-  userSubscription: Subscription;
+  private webSocket!: WebSocket;
+  userSubscription!: Subscription;
   userId!: number;
 
   constructor(private usuarioService: UsuarioService, private notificacaoService: NotificacaoService) {
+  }
+  
+  public start(): void {
+    console.debug('Going to connect to the websockets server');
     this.userSubscription = this.usuarioService.retornaUser().subscribe(user => {
-      if (user) {
-        console.log(user);
-        this.userId = user.usuario_id;
-        const wsUrl = `${environment.wsUrl}?userId=${this.userId}`;
-        this.socket = new WebSocket(wsUrl);
-        this.socket.onopen = () => {
-          console.log('WebSocket connection established');
-        };
-
-        this.socket.onmessage = this.onMessage.bind(this);
-
-        this.socket.onerror = (error) => {
-          console.error('WebSocket error:', error);
-        };
-
-        this.socket.onclose = (event) => {
-          console.log('WebSocket connection closed:', event);
-        };
-      }
+      this.connect(`${environment.wsUrl}?userId=${user?.usuario_id}`);
     });
   }
-
-  private onMessage(event: MessageEvent) {
-    console.log('WebSocket message received:', event.data);
-    const data = JSON.parse(event.data);
-    const notification: Notificacao = {
-      title: data.title,
-      message: data.message
+  
+  public stop(): void {
+    if (this.webSocket != null) {
+      this.webSocket.close();
+    }
+  }
+  
+  private connect(url: string): void {
+    this.webSocket = new WebSocket(url);
+    
+    this.webSocket.onopen = () => {
+      console.info('WebSocket connection has been opened');
     };
-    this.storeNotification(notification);
+
+    const onMessage = (event: MessageEvent) => {
+      console.log('WebSocket message received:', event.data);
+      const data = JSON.parse(event.data);
+      const notification: Notificacao = {
+        title: data.title,
+        message: data.message
+      };
+      this.storeNotification(notification);
+    }
+    this.webSocket.onmessage = onMessage;
+
+    this.webSocket.onerror =  () => {
+      console.error('WebSocket error observed');
+    };
+
+    this.webSocket.onclose = () => {
+      console.info('WebSocket connection has been closed');
+    };
   }
 
   private storeNotification(notification: Notificacao) {
