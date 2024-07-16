@@ -7,6 +7,7 @@ import { Notificacao } from '../../core/interfaces/notificacao.interface';
 import { NotificacaoService } from '../../core/services/notificacao.service';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../core/services/usuario.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-notificacao',
@@ -20,36 +21,16 @@ import { UsuarioService } from '../../core/services/usuario.service';
   templateUrl: './notificacao.component.html',
   styleUrl: './notificacao.component.scss'
 })
-export class NotificacaoComponent implements OnInit, OnDestroy {
+export class NotificacaoComponent implements OnInit {
   notificacoes: Notificacao[] = [];
-  notificacaoSubscription!: Subscription;
-  userSubscription!: Subscription;
-  userId!: number;
 
-  constructor(private notificacaoService: NotificacaoService, private usuarioService: UsuarioService) { }
+  constructor(private notificacaoService: NotificacaoService, private usuarioService: UsuarioService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.userSubscription = this.usuarioService.retornaUser().subscribe(user => {
-      if (user) {
-        this.userId = user.usuario_id;
-        this.iniciarStreamMensagens();
-      }
+    this.notificacaoService.getNotifications().subscribe(notifications => {
+      this.notificacoes = notifications;
+      if(this.notificacoes.length > 0)
+        this.snackBar.open('Você tem uma nova notificação!', 'ok');
     });
-  }
-
-  iniciarStreamMensagens() {
-    this.notificacaoSubscription = this.notificacaoService.getMensagensStream(this.userId)
-      .subscribe(mensagem => {
-        this.notificacoes.unshift(mensagem);
-      });
-  }
-
-  ngOnDestroy(): void {
-    if (this.notificacaoSubscription) {
-      this.notificacaoSubscription.unsubscribe();
-    }
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
   }
 }
